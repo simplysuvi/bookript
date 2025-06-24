@@ -1,3 +1,8 @@
-[build]
-  command = "echo 'No build command needed'"
-  publish = "/"
+[functions]
+  external_node_modules = ["express", "axios", "cheerio"]
+  node_bundler = "esbuild"
+[[redirects]]
+  force = true
+  from = "/api/*"
+  status = 200
+  to = "/.netlify/functions/api/:splat"

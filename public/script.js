@@ -267,18 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         try {
-            const search_url = `https://libgen.gs/index.php?req=${encodeURIComponent(query)}&res=10&filesuns=all&covers=on&curtab=f`;
-            console.log(`Fetching download links for: ${search_url}`);
-            const response = await fetch(`https://corsproxy.io/?${search_url}`);
-            const html = await response.text();
-            const $ = cheerio.load(html);
-            const links = [];
-            $('table.table-striped tbody tr').slice(0, 5).each((i, el) => {
-                const detailLink = $(el).find('td:last-child a').attr('href');
-                if (detailLink) {
-                    links.push('https://libgen.gs/' + detailLink);
-                }
-            });
+            const response = await fetch(`/api/download-links?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            const { links } = data;
 
             if (links && links.length > 0) {
                 downloadLinksDiv.innerHTML = `
