@@ -160,11 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const thumbnailHTML = book.thumbnail
             ? `<img src="${book.thumbnail}" alt="${book.title}" loading="lazy">`
             : `<div class="book-placeholder">
-                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                 </svg>
-               </div>`;
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>`;
 
         bookDiv.innerHTML = `
             <div class="book-cover">
@@ -268,7 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const search_url = `https://libgen.gs/index.php?req=${encodeURIComponent(query)}&res=10&filesuns=all&covers=on&curtab=f`;
-            const response = await fetch(`https://cors-anywhere.herokuapp.com/${search_url}`);
+            console.log(`Fetching download links for: ${search_url}`);
+            const response = await fetch(`https://corsproxy.io/?${search_url}`);
             const html = await response.text();
             const $ = cheerio.load(html);
             const links = [];
