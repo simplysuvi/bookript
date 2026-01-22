@@ -3,14 +3,6 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = true
-  conditions = { Role = ["authenticated"] }
-
-
-[[redirects]]
   force = true
   from = "/api/*"
   status = 200
