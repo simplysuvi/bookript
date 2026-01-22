@@ -1,6 +1,15 @@
 [functions]
   external_node_modules = ["express", "axios", "cheerio"]
   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+  conditions = { Role = ["authenticated"] }
+
+
 [[redirects]]
   force = true
   from = "/api/*"
